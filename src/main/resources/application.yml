@@ -1,6 +1,10 @@
 server:
   port: 9000
 spring:
+  application:
+    name: "cards"
+  profiles:
+    active: "prod"
   datasource:
     url: jdbc:h2:mem:testdb
     driverClassName: org.h2.Driver
@@ -15,21 +19,4 @@ spring:
       ddl-auto: update
     show-sql: true
   config:
-    import:
-      - "application_qa.yml"
-      - "application_prod.yml"
-  profiles:
-    active:
-      - "qa"
-
-build:
-  version: "3.0"
-
-cards:
-  message: "Welcome to EazyBank cards related local APIs "
-  contactDetails:
-    name: "Yehor Kravchenko - Developer"
-    email: "brazuca.egor@gmail.com"
-  onCallSupport:
-    - (555) 555-5555
-    - (555) 523-5555
+    import: "optional:configserver:http://localhost:8071/"
